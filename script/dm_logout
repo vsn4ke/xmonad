@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+DMENU="dmenu -i -l 20 -p"
+
+declare -a options=("Reboot" "Shutdown" "Suspend" "Quit")
+choice=$(printf '%s\n' "${options[@]}" | ${DMENU} 'Shutdown menu:' "${@}")
+if [[ "$(echo -e "Yes\nNo" | ${DMENU} "${choice}?" "${@}" )" == "Yes" ]]; then
+    case $choice in
+        'Reboot')   systemctl reboot;;        
+        'Shutdown') systemctl poweroff;;
+        'Suspend')  systemctl suspend;;
+    esac
+else
+    exit 0
+fi

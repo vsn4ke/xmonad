@@ -1,0 +1,77 @@
+conky.config = 
+  { background = true
+  , double_buffer = true
+  , update_interval = 60
+  , alignment = 'top_right'
+  , gap_x = 50
+  , gap_y = 70
+  , minimum_height = 200
+  , minimum_width = 260
+  , maximum_width = 260
+  , border_inner_margin = 5
+  , border_outer_margin = 5
+  , border_width = 0
+  , draw_shades =  false
+  , draw_outline = false
+  , font  = 'Source Code Pro:bold:size=10'
+  , font2 = 'Raleway:bold:size=30'
+  , font3 = 'Ubuntu:size=14'
+  , font4 = 'Raleway:bold:size=9'
+  , max_text_width = 0
+  , max_user_text = 16384
+  , override_utf8_locale = true
+  , top_name_width = 21
+  , top_name_verbose = false
+  , use_xft = true
+  , xftalpha = 1
+  , own_window = true
+  , own_window_argb_value = 255
+  , own_window_argb_visual = true
+  , own_window_class = 'Conky'
+  , own_window_colour = '#282c34'
+  , own_window_transparent = false
+  , own_window_title = 'xmonad_conky'
+  , own_window_type = 'override'
+  , own_window_hints = 'undecorated,below,above,sticky,skip_taskbar,skip_pager'
+  , color0 = '#c678dd'
+  , color1 = '#bbc2cf'
+  , color2 = '#51afef'
+  , color3 = '#98be65'};
+
+conky.text = [[
+${alignc}${color0}${font2}${time %H:%M}${font}
+${voffset 6}${alignc}${color0}${font3}${time %b %d, %Y}${font}${color}
+${color1}${hr}${color}
+${color1}[S]+[RET]${alignr}${color2}open terminal${color}
+${color1}[S]+[SHIFT]+c${alignr}${color2}close window${color}
+${color1}[S]+j/k${alignr}${color2}move win focus${color}
+${color1}[S]+[SHIFT]+hjkl${alignr}${color2}move window${color}
+${color1}[S]+[1-9]${alignr}${color2}switch workspace${color}
+${color1}[S]+[SHIFT]+[1-9]${alignr}${color2}send window${color}
+${color1}[S]+h/l${alignr}${color2}shrink/expand${color}
+${color1}${hr}${color}
+${color1}[S]+t l${alignr}${color2}display trash${color}
+${color1}[S]+t c${alignr}${color2}empty trash${color}
+${color1}${hr}${color}
+${color1}[S]+s m${alignr}${color2}scratch mocp${color}
+${color1}[S]+s t${alignr}${color2}scratch term${color}
+${color1}[S]+s c${alignr}${color2}scratch calc${color}
+${color1}${hr}${color}
+${color1}[S]+x p${alignr}${color2}mocp play${color}
+${color1}[S]+x l${alignr}${color2}mocp next${color}
+${color1}[S]+x h${alignr}${color2}mocp prev${color}
+${color1}[S]+x +${alignr}${color2}mocp vol +${color}
+${color1}[S]+x -${alignr}${color2}mocp vol -${color}
+${color1}[S]+x v${alignr}${color2}mocp vol 5${color}
+${color1}[S]+x [SPACE]${alignr}${color2}mocp toggle pause${color}
+${color1}${hr}${color}
+${color1}[S]+c b${alignr}${color2}open firefox${color}
+${color1}[S]+c c${alignr}${color2}open codium${color}
+${color1}[S]+c d${alignr}${color2}open discord${color}
+${color1}[S]+c t${alignr}${color2}open thunar${color}
+${color1}[S]+c h${alignr}${color2}open htop${color}
+${color1}${hr}${color}
+${color1}[S]+p p${alignr}${color2}DMenu${color}
+${color1}[S]+[SHIFT] q${alignr}${color2}Logout${color}
+${color1}[S]+q${alignr}${color2}restart xmonad${color}
+]];
