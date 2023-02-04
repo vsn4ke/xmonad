@@ -1,14 +1,3 @@
-#!/bin/zsh
-#last_modif=$(date '+%M' -d "@$(stat -c '%Y' ~/.script/weather.json)")
-
-#if [ $last_modif -gt 30 ]
-#then
-    curl -s "https://wttr.in/esplechin?format=j1" | jq '.current_condition[0]'> ~/.script/weather.json
-#fi
-
-temp=$(cat ~/.script/weather.json | jq '.temp_C')
-windD=$(cat ~/.script/weather.json | jq '.winddir16Point')
-windS=$(cat ~/.script/weather.json | jq '.windspeedKmph')
-precip=$(cat ~/.script/weather.json | jq '.precipMM')
-
-echo " $temp°C  $windD ${windS}Km/h  ${precip}mm" | sed 's/"//g'
+#!/bin/sh
+read -r a b c d <<<$(curl -s "https://wttr.in/esplechin?format=j1" | jq '.current_condition[0]'| jq '.temp_C, .winddir16Point, .windspeedKmph, .precipMM' | sed 's/"//g' | tr '\n' ' ')
+echo " ${a}°C  ${b} ${c}Km/h  ${d}mm"

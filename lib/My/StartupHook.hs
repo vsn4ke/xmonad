@@ -14,5 +14,5 @@ myStartupHook = do
     spawnOnce "xmodmap -e \"pointer = 1 2 3\""
     spawn ("xmobar -x 1 " ++ xmobarCfgPath ++ "1")
     spawn ("sleep 2 && conky -c " ++ xmonadCfgPath ++ "/01.conkyrc")
-    spawn "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 22"
+    spawn "sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 22"
     spawnOnce "feh --randomize --bg-fill ~/Images/wallpaper/*"

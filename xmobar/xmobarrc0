@@ -8,7 +8,7 @@ Config { font = "xft:Hack Nerd Font:style=Regular:pixelsize=16:antialias=true:hi
        , persistent   = True
        , commands = 
               [ Run StdinReader
-              , Run Com "/bin/sh" [ "-c" , "/home/vsn4ke/.config/xmonad/script/xb_weather" ] "w" 36000]
+              , Run Com "/bin/sh" ["-c", "/home/vsn4ke/.config/xmonad/script/xb_weather"] "w" 36000]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "| %StdinReader% }{ %w% |"
