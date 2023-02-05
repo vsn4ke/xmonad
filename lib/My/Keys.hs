@@ -61,6 +61,7 @@ myKeys c =
                 [ ("M-s t", addName "Toggle scratchpad terminal" $ namedScratchpadAction myScratchPads "terminal")
                 , ("M-s m", addName "Toggle scratchpad mocp" $ namedScratchpadAction myScratchPads "mocp")
                 , ("M-s c", addName "Toggle scratchpad calculator" $ namedScratchpadAction myScratchPads "calculator")
+                , ("M-s v", addName "Toggle scratchpad mixer" $ namedScratchpadAction myScratchPads "mixer")
                 ]
   where
     nonNSP = WSIs (return (\ws -> W.tag ws /= "NSP"))

@@ -10,6 +10,7 @@ myScratchPads =
   [ NS "terminal" spawnTerm findTerm manageTerm
   , NS "mocp" spawnMocp findMocp manageMocp
   , NS "calculator" spawnCalc findCalc manageCalc
+  , NS "mixer" spawnMixer findMixer manageMixer
   ]
  where
   spawnTerm = myTerminal ++ " -T scratchpad"
@@ -36,3 +37,11 @@ myScratchPads =
     w = 0.4
     t = 0.75 - h
     l = 0.70 - w
+  spawnMixer = myTerminal ++ " -T mixer -e alsamixer"
+  findMixer = title =? "mixer"
+  manageMixer = customFloating $ W.RationalRect l t w h
+   where
+    h = 0.9
+    w = 0.9
+    t = 0.95 - h
+    l = 0.95 - w

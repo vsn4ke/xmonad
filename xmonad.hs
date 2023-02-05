@@ -5,18 +5,22 @@ import My.ManageHook
 import My.Scratchpads
 import My.StartupHook
 
+import My.Xmobar (spawnBar)
 import XMonad
 import XMonad.Config.Azerty
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.WindowSwallowing
+import XMonad.Layout.MagicFocus
 import XMonad.Util.Hacks qualified as H
 import XMonad.Util.NamedActions
 import XMonad.Util.Run
 
 main = do
-  xmproc0 <- spawnPipe ("xmobar -x 0 " ++ xmobarCfgPath ++ "0")
+  -- xmproc0 <- spawnPipe ("xmobar -x 0 " ++ xmobarCfgPath ++ "0")
+  xmproc0 <- spawnBar 0
+  xmproc1 <- spawnBar 1
   xmonad $
     addDescrKeys ((mod4Mask, xK_F1), xMessage) myKeys . ewmh . docks $
       azertyConfig
@@ -28,7 +32,9 @@ main = do
         , focusedBorderColor = "#bbc2cf"
         , mouseBindings = myMouseBindings
         , manageHook = myManageHook <+> manageDocks
-        , handleEventHook = H.windowedFullscreenFixEventHook <> swallowEventHook (className =? "Kitty" <||> className =? "XTerm") (return True)
+        , handleEventHook =
+            H.windowedFullscreenFixEventHook
+              <> swallowEventHook (className =? "Kitty" <||> className =? "XTerm") (return True)
         , layoutHook = myLayoutHook
         , logHook =
             dynamicLogWithPP $
@@ -42,5 +48,4 @@ main = do
                 , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"
                 }
         , startupHook = myStartupHook
-        , focusFollowsMouse = False
         }
