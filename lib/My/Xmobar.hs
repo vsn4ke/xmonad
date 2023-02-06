@@ -12,13 +12,12 @@ colorNorm = "\"--normal\", \"darkorange\""
 colorHigh = "\"--high\", \"darkred\""
 thresholdLow = "\"--Low\", \"20\""
 thresholdHigh = "\"--High\", \"80\""
-thresholdNetLow = "\"--Low\", \"1000\""
+thresholdNetLow = "\"--Low\", \"3000\""
 thresholdNetHigh = "\"--High\", \"5000\""
-cpu = "\"-t\", \"CPU <bar>\""
-mem = "\"-t\",\"MEM <usedbar>\""
-diskU = "(\"/home\", \"HDD <usedbar>\")"
-dynNetwork = "\"-t\", \"Down <rxbar> Up <txbar>\""
-
+cpu = "\"-t\", \"Cpu <bar>\""
+mem = "\"-t\",\"Mem <usedbar>\""
+diskU = "(\"/home\", \"Hdd <usedbar>\")"
+dynNetwork = "\"-t\", \"D:<rx>Kb/s Up:<tx>Kb/s\""
 myTemplates :: Int -> (String, String)
 myTemplates s
   | s == 0 = leftTmpl
@@ -46,7 +45,7 @@ myCommands s
     [ runCpu [cpu, thresholdLow, thresholdHigh, colorLow, colorNorm, colorHigh]
     , runMem [mem, thresholdLow, thresholdHigh, colorLow, colorNorm, colorHigh]
     , runDiskU [thresholdHigh, colorHigh]
-    , runDynNetwork [dynNetwork, thresholdNetLow, thresholdNetHigh, colorLow, colorNorm, colorHigh]
+    , runDynNetwork [dynNetwork]
     , "Run Com \"/bin/sh\" [\"-c\",\"" ++ scriptPath ++ "/trayer-padding-icon.sh\"] \"trayerpad\" 100"
     , "Run Com \"/bin/sh\" [\"-c\", \"" ++ scriptPath ++ "/xb_weather\"] \"w\" 36000"
     ]
@@ -64,7 +63,7 @@ spawnBar s = spawnPipe cmd
   cmd =
     unwords
       [ "/usr/bin/xmobar"
-      , "-f 'xft:Hack Nerd Font:style=Regular:pixelsize=16:antialias=true:hinting=light'"
+      , "-f 'xft:Mononoki Nerd Font:style=Regular:pixelsize=16'"
       , "-B '#282c34'"
       , "-F '#55aaaa'"
       , "-o"
