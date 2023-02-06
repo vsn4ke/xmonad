@@ -1,22 +1,35 @@
 module My.Xmobar where
 
 import Data.List (intersperse)
+import My.Globals (scriptPath)
+import Text.ParserCombinators.ReadP (sepBy)
 import XMonad.Hooks.DynamicLog (wrap, xmobarColor)
 import XMonad.Util.Run (spawnPipe)
 
-myTemplates :: Int -> (String, String, String)
+colorLow, colorNorm, colorHigh, thresholdHigh, thresholdLow, thresholdNetHigh, thresholdNetLow, cpu, mem, diskU, dynNetwork :: String
+colorLow = "\"--low\", \"green\""
+colorNorm = "\"--normal\", \"darkorange\""
+colorHigh = "\"--high\", \"darkred\""
+thresholdLow = "\"--Low\", \"20\""
+thresholdHigh = "\"--High\", \"80\""
+thresholdNetLow = "\"--Low\", \"1000\""
+thresholdNetHigh = "\"--High\", \"5000\""
+cpu = "\"-t\", \"CPU <bar>\""
+mem = "\"-t\",\"MEM <usedbar>\""
+diskU = "(\"/home\", \"HDD <usedbar>\")"
+dynNetwork = "\"-t\", \"Down <rxbar> Up <txbar>\""
+
+myTemplates :: Int -> (String, String)
 myTemplates s
   | s == 0 = leftTmpl
   | s == 1 = rightTmpl
  where
   leftTmpl =
     ( "| %StdinReader% |"
-    , ""
     , "| <fc=#ee9a00>%date%</fc> |"
     )
   rightTmpl =
     ( "| %cpu% | %memory% | %disku% |"
-    , ""
     , "| %dynnetwork% | %w% |%trayerpad%"
     )
 
@@ -30,18 +43,21 @@ myCommands s
     , "Run Date \"%a %Y-%m-%d %H:%M\" \"date\" 600"
     ]
   rightCmds =
-    [ "Run Cpu [ \"-t\", \"CPU:<total>%\",\
-      \ \"-p\", \"3\",\
-      \ \"-H\", \"70\",\
-      \ \"--normal\", \"green\",\
-      \ \"--high\",\"red\"\
-      \ ] 50"
-    , "Run Memory   [\"-t\",\"MEM:<used>M used\"] 50"
-    , "Run DiskU [(\"/home\", \"HDD:<used> used\")][] 600"
-    , "Run DynNetwork [\"-t\", \"Down <rx>KB Up <tx>KB\"] 100"
-    , "Run Com \"/bin/sh\" [\"-c\",\"/home/vsn4ke/.config/xmonad/script/trayer-padding-icon.sh\"] \"trayerpad\" 100"
-    , "Run Com \"/bin/sh\" [\"-c\", \"/home/vsn4ke/.config/xmonad/script/xb_weather\"] \"w\" 36000"
+    [ runCpu [cpu, thresholdLow, thresholdHigh, colorLow, colorNorm, colorHigh]
+    , runMem [mem, thresholdLow, thresholdHigh, colorLow, colorNorm, colorHigh]
+    , runDiskU [thresholdHigh, colorHigh]
+    , runDynNetwork [dynNetwork, thresholdNetLow, thresholdNetHigh, colorLow, colorNorm, colorHigh]
+    , "Run Com \"/bin/sh\" [\"-c\",\"" ++ scriptPath ++ "/trayer-padding-icon.sh\"] \"trayerpad\" 100"
+    , "Run Com \"/bin/sh\" [\"-c\", \"" ++ scriptPath ++ "/xb_weather\"] \"w\" 36000"
     ]
+   where
+    runCpu = sepByComma "Run Cpu [" "] 30"
+    runMem = sepByComma "Run Memory [" "] 30"
+    runDiskU = sepByComma ("Run DiskU [" ++ diskU ++ "][") "] 600"
+    runDynNetwork = sepByComma "Run DynNetwork [" "] 30"
+
+sepByComma :: String -> String -> [String] -> String
+sepByComma f s x = wrap f s $ unwords $ intersperse "," x
 
 spawnBar s = spawnPipe cmd
  where
@@ -62,5 +78,5 @@ spawnBar s = spawnPipe cmd
       , show s
       ]
    where
-    fmtt (l, c, r) = wrap "'" "'" $ l ++ "}" ++ c ++ "{" ++ r
+    fmtt (l, r) = wrap "'" "'" $ l ++ "}{" ++ r
     fmtc x = wrap "'[ " " ]'" $ unwords $ intersperse "," x
