@@ -54,7 +54,6 @@ ${color1}[S]+t l${alignr}${color2}display trash${color}
 ${color1}[S]+t c${alignr}${color2}empty trash${color}
 ${color1}${hr}${color}
 ${color1}[S]+s m${alignr}${color2}scratch mocp${color}
-${color1}[S]+s t${alignr}${color2}scratch term${color}
 ${color1}[S]+s c${alignr}${color2}scratch calc${color}
 ${color1}${hr}${color}
 ${color1}[S]+x p${alignr}${color2}mocp play${color}
@@ -72,6 +71,8 @@ ${color1}[S]+c t${alignr}${color2}open thunar${color}
 ${color1}[S]+c h${alignr}${color2}open htop${color}
 ${color1}${hr}${color}
 ${color1}[S]+p p${alignr}${color2}DMenu${color}
+${color1}[S]+p m${alignr}${color2}View man page${color}
+${color1}${hr}${color}
 ${color1}[S]+[SHIFT] q${alignr}${color2}Logout${color}
 ${color1}[S]+q${alignr}${color2}restart xmonad${color}
 ]];

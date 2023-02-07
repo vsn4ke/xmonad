@@ -1,0 +1,2 @@
+#!/bin/sh
+man -k . |  grep -o '^\S*' | dmenu -i -l 10 -p 'Search manpages: ' | xargs urxvt -e man
