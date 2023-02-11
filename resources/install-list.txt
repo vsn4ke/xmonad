@@ -1,0 +1,52 @@
+xorg installed or
+ sudo dnf install @base-x
+
+.xinitrc: 
+#!/bin/bash  
+exec xmonad 
+
+
+ghcup:
+ sudo dnf install gcc gcc-c++ gmp gmp-devel make ncurses ncurses-compat-libs xz perl
+ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+ 
+xmonad (ghc version 9.2.5 change if needed): 
+ sudo dnf install ghc-X11-devel
+ cabal install xmonad xmonad-contrib xmobar
+ mkdir -p ~/.ghc/x86_64-linux-9.2.5/
+ ln -s ~/.cabal/store/ghc-9.2.5/package.db ~/.ghc/x86_64-linux-9.2.5/package.conf.d
+ chmod +x ~/.config/xmonad/script/*
+
+Mononoki:
+ https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Mononoki.zip
+
+rpm fusion:
+ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+rpm sphere (trayer)
+ https://github.com/rpmsphere/noarch/tree/master/r
+ rpm -Uvh rpmsphere-release*rpm
+ dnf install trayer
+
+codium:
+ printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
+ sudo dnf install codium
+
+ sudo dnf install Kitty rxvt-unicode XTerm feh neovim git speedcrunch firefox dmenu thunar htop moc mpv pasystray
+
+discord (rpmfusion installed:
+ sudo dnf install discord
+
+spacevim (neovim installed):
+ curl -sLf https://spacevim.org/install.sh | bash
+ mv ~/.nvim ~/.config/nvim
+ sudo dnf install pip
+ pip install pynvim
+ 
+brave browser: 
+ sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+ sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+ sudo dnf install brave-browser
+
+rustup
+ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

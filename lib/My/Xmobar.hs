@@ -46,7 +46,7 @@ myCommands s
         runMem [mem, thresholdLow, thresholdHigh, colorLow, colorNorm, colorHigh],
         runDiskU [thresholdHigh, colorHigh],
         runDynNetwork [dynNetwork],
-        "Run Com \"/bin/sh\" [\"-c\",\"" ++ scriptPath ++ "/trayer-padding-icon.sh\"] \"trayerpad\" 100",
+        "Run Com \"/bin/sh\" [\"-c\",\"" ++ scriptPath ++ "/padding\"] \"trayerpad\" 100",
         "Run Com \"/bin/sh\" [\"-c\", \"" ++ scriptPath ++ "/xb_weather\"] \"w\" 36000"
       ]
       where
@@ -62,8 +62,8 @@ spawnBar s = spawnPipe cmd
   where
     cmd =
       unwords
-        [ "/usr/bin/xmobar",
-          "-f 'xft:Mononoki Nerd Font:style=Regular:pixelsize=16'",
+        [ "xmobar",
+          "-f 'Mononoki Nerd Font Regular 16'",
           "-B '#282c34'",
           "-F '#55aaaa'",
           "-o",

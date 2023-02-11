@@ -58,7 +58,7 @@ tabs =
 
 myTabTheme =
     def
-        { fontName = "xft:SauceCodePro Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
+        { fontName = "Mononoki Nerd Font Regular 16"
         , activeColor = color01
         , inactiveColor = "#202328"
         , activeBorderColor = color01

@@ -2,7 +2,7 @@ module My.Globals where
 
 xmobarCfgPath = xmonadCfgPath ++ "/xmobar/xmobarrc"
 myWorkspaces = [" dev ", " www ", " video ", " discord "]
-xmonadCfgPath = "/home/vsn4ke/.config/xmonad"
+xmonadCfgPath = "~/.config/xmonad"
 scriptPath = xmonadCfgPath ++ "/script"
 myTerminal = "kitty"
 colorBack = "#282c34"
